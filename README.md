@@ -15,9 +15,13 @@ The repository currently contains pretrained models and datasets for the experim
 
 
 
-## Installation & Data Preparation
+## Installation
 
-1. **Anaconda environment installations for training & testing**
+There are two methods of installing and running the project:
+- Anaconda installation
+- Docker container
+
+### Anaconda environment installations for training & testing
 
 ```
 conda create -n gca python=3.8
@@ -45,10 +49,26 @@ pip install --no-index torch-scatter -f https://pytorch-geometric.com/whl/torch-
 ```
 The repo was tested with NVIDIA 2080ti GPU (11GB). Note that MinkowskiEngine might be difficult to install, please see the issue of the MinkowskiEngine or this repo for help.
 
+### Docker container for training & testing
 
+The repo includes a Docker file with the necessary image and dependancies specified. Make sure you have docker installed and running beforehand.
 
+You can create an image from the dockerfile and then run a container directly, then execute training and testing commands from an attached shell. You can even modify the final layer of the Dockerfile as you see fit, make sure not to tamper with the dependancy layers however. 
 
-2. **Data preparation and Pretrained Models**
+Sample commands to build a docker image and run the docker container are as follows:
+
+```
+# To build the image
+docker build -t gca:train_test .
+
+# To run container
+docker run -it --gpus all gca:train_test
+```
+
+It is important to include the `--gpus` tag, otherwise the container will not utilise the system GPU for training and testing.
+
+## Data Preparation and Pretrained Models
+
 
 [Link](https://drive.google.com/drive/folders/1DID47BZBkPHKPhpPgpmZgM7GBoutqlPa?usp=sharing) contains the datasets (sdf & preprocessed sparse voxel embedding for ShapeNet, ShapnetNet scene) and pretrained models (GCA, cGCA, cGCA w/ cond.). Place the files with directory as below. This link contains all the data except for conv_onet (input point cloud of ShapeNet scene dataset), which can be downloaded from [here](https://github.com/autonomousvision/convolutional_occupancy_networks#synthetic-indoor-scene-dataset) and unzipped/renamed as `conv_onet` from `synthetic_room_dataset.zip`. All directories not specified as downloadable from conv_onet repo can be obtained from our google drive. Note that we call the Shapenet Scene datasets as synthetic as abbreviation.  
 
