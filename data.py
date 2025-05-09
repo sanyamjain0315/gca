@@ -201,3 +201,10 @@ class DataBuffer:
 		return len(self.buffer) >= self.buffer_size
 
 
+if __name__=="__main__":
+  import yaml
+  with open("gca-data/pretrained_models/gca-chair/config.yaml", 'r') as f:
+    config = yaml.load(f, Loader=yaml.SafeLoader)
+  
+  data_scheduler = DataScheduler(config=config)
+  print(next(data_scheduler))

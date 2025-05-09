@@ -130,3 +130,4 @@ dmypy.json
 
 data/
 pretrained_models/
+gca-data/
